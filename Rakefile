@@ -16,10 +16,11 @@ Juwelier::Tasks.new do |gem|
   gem.name = "hash-initializer"
   gem.homepage = "http://github.com/jits/hash-initializer"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "dev@jits.co.uk"
+  gem.summary = %Q{Initialise Ruby hashes with multiple levels of default values}
+  gem.description = %Q{I heard you like hashes within your hashes, so I made a thing to initialise hashes within your hashes (and more!)}
+  gem.email = "nospam@jits.co.uk"
   gem.authors = ["Jits"]
+  gem.required_ruby_version = '>= 2.3.0'
 
   # dependencies defined in Gemfile
 end
