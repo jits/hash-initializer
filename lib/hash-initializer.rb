@@ -1,1 +1,1 @@
-require 'hash_initializer'
+require_relative 'hash_initializer'
