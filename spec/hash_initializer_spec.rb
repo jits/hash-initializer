@@ -104,6 +104,28 @@ RSpec.describe HashInitializer do
     end
   end
 
+  context 'Hash with hash values with hash values' do
+    subject do
+      HashInitializer[
+        :hash,
+          :hash
+      ]
+    end
+
+    it 'should initialise a new hash with the expected levels of default values' do
+      expect(subject[:foo][:bar]).to eq Hash.new
+      expect(subject[:foo][:bar][:baz]).to eq nil
+      subject[:foo][:bar][:baz] = 1
+      expect(subject[:foo][:bar][:baz]).to eq 1
+
+      expect(subject[:foo][:bar][:bob]).to eq nil
+
+      expect(subject[:aaa]).to eq Hash.new
+      expect(subject[:aaa][:bar]).to eq Hash.new
+      expect(subject[:aaa][:bar][:baz]).to eq nil
+    end
+  end
+
   context 'Hash with hash values with hash values with default float values' do
     subject do
       HashInitializer[
@@ -123,6 +145,28 @@ RSpec.describe HashInitializer do
       expect(subject[:aaa]).to eq Hash.new
       expect(subject[:aaa][:bar]).to eq Hash.new
       expect(subject[:aaa][:bar][:baz]).to eq 1.0
+    end
+  end
+
+  context 'Hash with hash values with hash values with array values' do
+    subject do
+      HashInitializer[
+        :hash,
+          :hash,
+            :array
+      ]
+    end
+
+    it 'should initialise a new hash with the expected levels of default values' do
+      expect(subject[:foo][:bar][:baz]).to eq []
+      subject[:foo][:bar][:baz] << 'a'
+      expect(subject[:foo][:bar][:baz]).to eq ['a']
+
+      expect(subject[:foo][:bar][:bob]).to eq []
+
+      expect(subject[:aaa]).to eq Hash.new
+      expect(subject[:aaa][:bar]).to eq Hash.new
+      expect(subject[:aaa][:bar][:baz]).to eq []
     end
   end
 

@@ -12,9 +12,8 @@ module HashInitializer
 
     return {} if levels.empty?
 
-    Hash.new do |h,k|
-      h[k] = build_levels(levels)
-    end
+    defaults_proc = build_levels(levels)
+    Hash.new(&defaults_proc)
   end
 
   private
@@ -28,24 +27,17 @@ module HashInitializer
   end
 
   def build_levels levels
-    return Hash.new if levels.one? && levels.first == :hash
+    return Proc.new { |h,k| h[k] = Hash.new } if levels.one? && levels.first == :hash
 
-    last = build_level(nil, levels.last)
-
-    levels
-      .reverse
-      .drop(1)
-      .reduce(last, &method(:build_level))
-  end
-
-  def build_level previous, level
+    level = levels.first
     case level
     when :hash
-      Hash.new { |h,k| h[k] = previous }
+      inner_proc = build_levels(levels.drop(1))
+      Proc.new { |h,k| h[k] = Hash.new(&inner_proc) }
     when :array
-      Array.new
+      Proc.new { |h,k| h[k] = Array.new }
     else
-      level
+      Proc.new { |h,k| h[k] = level }
     end
   end
 
