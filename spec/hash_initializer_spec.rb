@@ -119,6 +119,10 @@ RSpec.describe HashInitializer do
       expect(subject[:foo][:bar][:baz]).to eq 2.5
 
       expect(subject[:foo][:bar][:bob]).to eq 1.0
+
+      expect(subject[:aaa]).to eq Hash.new
+      expect(subject[:aaa][:bar]).to eq Hash.new
+      expect(subject[:aaa][:bar][:baz]).to eq 1.0
     end
   end
 
