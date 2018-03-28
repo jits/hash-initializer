@@ -106,5 +106,5 @@ Use with consideration! Great for temporary data (e.g. whilst processing), or fo
 
 ## Copyright
 
-Copyright (c) 2017 Jits. See
+Copyright (c) 2018 Jits. See
 LICENSE.txt for further details.
